@@ -1,0 +1,21 @@
+# scenario.yaml — Example WarpBench configuration.
+#
+# Each scenario is a sequence of HTTP steps that a virtual user will replay
+# in a loop for the entire test duration.
+#
+# String values are zero-copy: WarpBench reads this whole file into memory
+# once, then all the url/method/etc fields are just pointers into that buffer.
+
+scenarios:
+  - name: "httpbin-demo"
+    steps:
+      # Step 1: simple GET
+      - method: GET
+        url: https://httpbin.org/get
+
+      # Step 2: POST with a JSON body and a custom header
+      - method: POST
+        url: https://httpbin.org/post
+        body: '{"user": "warpbench", "load": true}'
+        headers:
+          - "X-WarpBench-Run: 1"
